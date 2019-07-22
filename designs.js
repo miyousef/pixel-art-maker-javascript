@@ -9,19 +9,20 @@ const WidthInput = $('#inputWidth');
 form = $('#sizePicker');
 form.submit(function (event) {
   event.preventDefault(); // this will prevent page refreshing when submit button pressed
-  makeGrid(); //call makeGrid() to build the canvas with specific size
+  makeGrid(); 
 });
 
+/**
+makeGrid function To remove any previous table 
+Also to build new grid by loop
+ */
 function makeGrid() {
-  // Preparing the input values 
   let heightValue = HeightInput.val();
   let widthValue = WidthInput.val();
 
-  // Preparing the table
   let PixelCanvas = $('#pixelCanvas');
-  PixelCanvas.children().remove(); // This will remove any previous table
+  PixelCanvas.children().remove(); 
 
-  // Forming the canvas based on N(heightValue), M(widthValue)
   for (let N = 0; N < heightValue; N++) {
     PixelCanvas.append("<tr></tr>"); 
   }
@@ -29,13 +30,8 @@ function makeGrid() {
     $('tr').append("<td></td>");
   }
 
-  // Changes the background color of the cell, with respective chosen color
-  $('table').on('click', 'td', function () {
-    if ($(this).attr('style')) {
-      $(this).removeAttr('style')
-    } else {
-      $(this).attr('style', 'background-color:' + $('#colorPicker').val())
-    }
+  // To change cell's background color depending on choosing color
+  $('table').on('click', 'td', function() {
+    $(this).css('backgroundColor', colorInput.val() );
   });
-
 }
